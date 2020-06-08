@@ -17,11 +17,13 @@ const cooldowns = new Discord.Collection();
 
 client.once('ready', () => {
     client.user.setPresence({
-        game: {
-            name: 'Commands: !lfg !lfm !help',
-        },
-        status: 'online'
-    });
+            activity: {
+                name: ': !help !lfg !lfm',
+                type: 'LISTENING',
+            },
+            status: 'idle'
+        })
+        .catch(console.error);
     console.log('Ready!');
 });
 
