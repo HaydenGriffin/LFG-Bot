@@ -9,7 +9,7 @@ module.exports = {
     usage: '20',
     usageDescription: `Assigns you to the LFG role for 20 minutes`,
     guildOnly: true,
-    defaultDuration: 10,
+    defaultDuration: 15,
     args: false,
     cooldown: 10,
     execute(message, args) {
