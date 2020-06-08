@@ -16,6 +16,12 @@ for (const file of commandFiles) {
 const cooldowns = new Discord.Collection();
 
 client.once('ready', () => {
+    client.user.setPresence({
+        game: {
+            name: 'Commands: !lfg !lfm !help',
+        },
+        status: 'online'
+    });
     console.log('Ready!');
 });
 
