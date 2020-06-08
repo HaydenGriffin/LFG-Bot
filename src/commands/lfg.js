@@ -1,18 +1,20 @@
 require('dotenv').config()
 
 const lfgRoleMembers = require('../lfgMembers');
+const lfgRoleName = process.env.LFG_ROLE_NAME;
 
 module.exports = {
     name: 'lfg',
     description: 'Use this to signal that you are looking for a group to play with',
+    usage: '20',
+    usageDescription: `Assigns you to the LFG role for 20 minutes`,
     guildOnly: true,
     defaultDuration: 10,
     args: false,
-    cooldown: 5,
+    cooldown: 10,
     execute(message, args) {
         const now = Date.now();
-        const lfgRoleName = process.env.LFG_ROLE_NAME;
-        let member = message.member;
+        const member = message.member;
         let lfgRole = message.guild.roles.cache.find(role => role.name === lfgRoleName)
         let duration = this.defaultDuration;
 

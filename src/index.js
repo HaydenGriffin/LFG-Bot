@@ -34,7 +34,11 @@ client.on('message', message => {
     }
 
     if (command.args && !args.length) {
-        return message.channel.send(`You didn't provide any arguments, ${message.author}`)
+        let reply = `You didn't provide any arguments, ${message.author}!`
+        if (command.usage) {
+            reply += `/nThe proper usage is: \`${prefix}${command.name} ${command.usage}\``;
+        }
+        return message.channel.send(reply)
     }
 
     if (!cooldowns.has(command.name)) {
@@ -53,7 +57,6 @@ client.on('message', message => {
             return message.reply(`please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`);
         }
     }
-
 
     timestamps.set(message.author.id, now);
     setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);

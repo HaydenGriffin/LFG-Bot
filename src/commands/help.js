@@ -3,9 +3,8 @@ require('dotenv').config()
 module.exports = {
     name: 'help',
     description: 'List all of my commands or info about a specific command.',
-    guildOnly: false,
-    args: false,
     aliases: ['commands'],
+    usage: '[command name]',
     cooldown: 5,
     execute(message, args) {
         const data = [];
@@ -42,7 +41,8 @@ module.exports = {
 
         if (command.aliases) data.push(`**Aliases:** ${command.aliases.join(', ')}`);
         if (command.description) data.push(`**Description:** ${command.description}`);
-        if (command.usage) data.push(`**Usage:** ${process.env.PREFIX}${command.name} ${command.usage}`);
+        if (command.usage) data.push(`**Example usage:** ${process.env.PREFIX}${command.name} ${command.usage}`);
+        if (command.usageDescription) data.push(`**Usage description:** ${command.usageDescription}`);
 
         data.push(`**Cooldown:** ${command.cooldown || 3} second(s)`);
 
