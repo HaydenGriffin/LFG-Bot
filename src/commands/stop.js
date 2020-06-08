@@ -1,6 +1,5 @@
 require('dotenv').config()
 
-
 const lfgRoleMembers = require('../lfgMembers');
 const lfgRoleName = process.env.LFG_ROLE_NAME;
 

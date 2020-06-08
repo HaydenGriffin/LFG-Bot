@@ -22,15 +22,19 @@ client.once('ready', () => {
 client.on('message', message => {
     if (!message.content.startsWith(process.env.PREFIX) || message.author.bot) return;
 
+    const permissionRoleName = process.env.PERMISSION_ROLE_NAME;
     const args = message.content.slice(process.env.PREFIX.length).split(/ +/);
     const commandName = args.shift().toLowerCase();
-
     const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
     if (!command) return;
 
+    if (command.requirePermissions && !message.member.roles.cache.some(role => role.name === `${permissionRoleName}`)) {
+        return message.reply(`this command requires the ${permissionRoleName} role, which you don't have.`)
+    }
+
     if (command.guildOnly && message.channel.type !== 'text') {
-        return message.reply(`This command can only be executed in a server text channel!`)
+        return message.reply(`this command can only be executed in a server text channel!`)
     }
 
     if (command.args && !args.length) {
