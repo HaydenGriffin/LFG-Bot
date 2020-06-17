@@ -2,7 +2,7 @@ require('dotenv').config()
 
 const lfgRoleMembers = require('../lfgMembers');
 const lfgRoleName = process.env.LFG_ROLE_NAME;
-const permissionRoleName = process.env.PERMISSION_ROLE_NAME
+const permissionRoleName = process.env.PERMISSION_ROLE_NAME;
 
 module.exports = {
     name: 'rm',

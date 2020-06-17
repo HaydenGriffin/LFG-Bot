@@ -2,6 +2,8 @@ require('dotenv').config()
 
 const fs = require('fs');
 const Discord = require('discord.js');
+const prefix = process.env.PREFIX;
+const permissionRoleName = process.env.PERMISSION_ROLE_NAME;
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection;
@@ -18,7 +20,7 @@ const cooldowns = new Discord.Collection();
 client.once('ready', () => {
     client.user.setPresence({
             activity: {
-                name: ': !help !lfg !lfm',
+                name: '!help !lfg !lfm',
                 type: 'LISTENING',
             },
             status: 'idle'
@@ -28,10 +30,9 @@ client.once('ready', () => {
 });
 
 client.on('message', message => {
-    if (!message.content.startsWith(process.env.PREFIX) || message.author.bot) return;
+    if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-    const permissionRoleName = process.env.PERMISSION_ROLE_NAME;
-    const args = message.content.slice(process.env.PREFIX.length).split(/ +/);
+    const args = message.content.slice(prefix.length).split(/ +/);
     const commandName = args.shift().toLowerCase();
     const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
@@ -48,7 +49,7 @@ client.on('message', message => {
     if (command.args && !args.length) {
         let reply = `You didn't provide any arguments, ${message.author}!`
         if (command.usage) {
-            reply += `/nThe proper usage is: \`${prefix}${command.name} ${command.usage}\``;
+            reply += `\nThe proper usage is: \`${prefix}${command.name} ${command.usage}\``;
         }
         return message.channel.send(reply)
     }
