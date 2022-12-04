@@ -1,5 +1,5 @@
 # LFG-Bot
-A discord bot to help people to find groups to play games with. The app is deployed on Heroku and used in production on a few servers.
+A discord bot to help people to find groups to play games with. The app is deployed on Heroku and used in production on a few servers. By Hade
 
 ## About
 This bot was created using node.js and discord.js.
